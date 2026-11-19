@@ -23,7 +23,7 @@ dsh plugin --profile web add dsh-session-span
 
 The Desktop profile is owned by the app, so install there through the Plugins page.
 
-Requires DSH `>=0.2.2` and Node `>=22.6`. The package has no dependencies and no install scripts.
+Requires DSH `>=0.2.2-rc.3` and Node `>=22.6`. The package has no dependencies and no install scripts.
 
 ## What it shows
 
