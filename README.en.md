@@ -2,6 +2,9 @@
 
 [简体中文](README.md) | **English**
 
+[![npm version](https://img.shields.io/npm/v/dsh-session-span.svg)](https://www.npmjs.com/package/dsh-session-span)
+[![license](https://img.shields.io/npm/l/dsh-session-span.svg)](LICENSE)
+
 ## Introduction
 
 When work is organized as one task per session, two questions come up regularly: how much time this task has taken so far, and when it began. The current sidebar shows only the time since the most recent message, so neither question can be answered from it. This plugin therefore adds only the start time and the total elapsed time of the session, and nothing else.
@@ -24,9 +27,11 @@ First message 2026-11-19 10:57   This plugin: when it began
 
 ## Installation
 
-In the application, open **Settings → Plugins → Add plugin**, enter `dsh-session-span`, and enable the **Session elapsed time** bundle.
+The plugin is published on npm: [dsh-session-span](https://www.npmjs.com/package/dsh-session-span).
 
-In a `web` or other profile managed from a shell:
+**In the application (recommended)**: open **Settings → Plugins → Add plugin**, enter `dsh-session-span`, and enable the **Session elapsed time** bundle. The application installs the latest version from npm.
+
+**From a shell**, for a `web` or other profile managed from the command line:
 
 ```sh
 dsh plugin --profile web add dsh-session-span
@@ -57,6 +62,12 @@ The package is published as is, with no build step: the Host side is a plain ESM
 # point a profile at this checkout
 dsh plugin --profile web add /absolute/path/to/this/directory
 ```
+
+## Links
+
+- npm: [dsh-session-span](https://www.npmjs.com/package/dsh-session-span)
+- Repository: [github.com/aNoWhale/dsh-session-span](https://github.com/aNoWhale/dsh-session-span)
+- Issues: [github.com/aNoWhale/dsh-session-span/issues](https://github.com/aNoWhale/dsh-session-span/issues)
 
 ## License
 

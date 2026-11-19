@@ -2,6 +2,9 @@
 
 **简体中文** | [English](README.en.md)
 
+[![npm version](https://img.shields.io/npm/v/dsh-session-span.svg)](https://www.npmjs.com/package/dsh-session-span)
+[![license](https://img.shields.io/npm/l/dsh-session-span.svg)](LICENSE)
+
 ## 引言
 
 按“一个任务对应一个会话”的方式工作时，往往会关心两件事：这项任务已经投入了多少时间，以及它是从什么时候开始的。当前版本的侧边栏只显示最近一条消息距今的时间，无法回答这两个问题。为此，本插件只补充会话的起始时间与总用时，不涉及其他功能。
@@ -24,9 +27,11 @@ C:\Users\Administrator
 
 ## 安装
 
-在应用内打开「设置 → 插件 → 添加插件」，填写 `dsh-session-span`，然后启用「会话历时」插件包。
+本插件发布在 npm：[dsh-session-span](https://www.npmjs.com/package/dsh-session-span)。
 
-在由命令行管理的 `web` 等配置中安装：
+**在应用内安装（推荐）**：打开「设置 → 插件 → 添加插件」，填写 `dsh-session-span`，然后启用「会话历时」插件包。应用会从 npm 安装最新版本。
+
+**在命令行安装**，用于 `web` 等由命令行管理的配置：
 
 ```sh
 dsh plugin --profile web add dsh-session-span
@@ -57,6 +62,12 @@ dsh plugin --profile web add dsh-session-span
 # 让某个配置指向本仓库
 dsh plugin --profile web add /absolute/path/to/this/directory
 ```
+
+## 链接
+
+- npm：[dsh-session-span](https://www.npmjs.com/package/dsh-session-span)
+- 仓库：[github.com/aNoWhale/dsh-session-span](https://github.com/aNoWhale/dsh-session-span)
+- 问题反馈：[Issues](https://github.com/aNoWhale/dsh-session-span/issues)
 
 ## 许可
 
