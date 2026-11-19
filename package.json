@@ -13,6 +13,14 @@
     "session",
     "elapsed-time"
   ],
+  "homepage": "https://github.com/aNoWhale/dsh-session-span#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aNoWhale/dsh-session-span.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aNoWhale/dsh-session-span/issues"
+  },
   "engines": {
     "node": ">=22.6",
     "dsh": ">=0.2.2-rc.3"
