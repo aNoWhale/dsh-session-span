@@ -2,56 +2,62 @@
 
 [简体中文](README.md) | **English**
 
-A [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) plugin that shows **how long a conversation has been running since its first message**, right in the sidebar Session hover card.
+## Introduction
+
+When work is organized as one task per session, two questions come up regularly: how much time this task has taken so far, and when it began. The current sidebar shows only the time since the most recent message, so neither question can be answered from it. This plugin therefore adds only the start time and the total elapsed time of the session, and nothing else.
+
+## Features
+
+The Session hover card in the sidebar gains two lines:
+
+- **Elapsed time**: the time from the first message to the present. It continues to accumulate while the session is idle and updates every 30 seconds while the card is open.
+- **First message time**: shown in the device time zone, with a date format that follows the interface language (for example `2026-11-19 09:12` in English).
 
 ```
 Session title
 C:\Users\Administrator
-3 minutes ago                  ← DSH: last activity
-Elapsed 3 h 12 min             ← this plugin: from the first message
-First message 2026-11-19 10:57 ← and when that was
+3 minutes ago                    Existing: time since the most recent message
+Elapsed 3 h 12 min               This plugin: time since the first message
+First message 2026-11-19 10:57   This plugin: when it began
 ● Running
 ```
 
-## Install
+## Installation
 
-In the app: **Settings → Plugins → Add plugin**, enter `dsh-session-span`, then enable the **Session elapsed time** bundle.
+In the application, open **Settings → Plugins → Add plugin**, enter `dsh-session-span`, and enable the **Session elapsed time** bundle.
 
-From a shell, for a `web` profile:
+In a `web` or other profile managed from a shell:
 
 ```sh
 dsh plugin --profile web add dsh-session-span
 ```
 
-The Desktop profile is owned by the app, so install there through the Plugins page.
+The Desktop profile is managed by the application, so install from the Plugins page there.
 
-Requires DSH `>=0.2.2-rc.3` and Node `>=22.6`. The package has no dependencies and no install scripts.
+Requirements: DSH `>=0.2.2-rc.3` and Node `>=22.6`. The package has no dependencies and no installation scripts.
 
-## What it shows
+## How the start time is determined
 
-- `Elapsed` — wall-clock time from the conversation's first message to now. It keeps counting while the Session is idle and refreshes every 30 seconds while the card is open.
-- `First message` — that start stamp in the device time zone, formatted through the app locale (English shows `2026-11-19 09:12`).
+- The start time is the first message in the session log that was initiated by the user or by a scheduled task. A session created by a scheduled task therefore also has a start time.
+- A session created by forking another session uses its own creation time, not the first message of the original session.
+- The duration is computed and cached by DSH on the Host from the complete session log, and is delivered with the session summary to the sidebar. Paging, compaction, and restarts do not change the result.
+- Sessions that existed before the plugin was installed have no cached result. The first hover reads it once, after which it is cached; for sessions with a long log, this section may appear slightly later on that first hover.
 
-## How the start is decided
+## Notes and limitations
 
-- The start is the first `user/message` committed with a `user` or `schedule` source, so a Session created by a scheduled task also has a start.
-- A fork counts from its own creation instead of inheriting the parent's first prompt.
-- The value is a Host Session projection (`sessionSpan`) folded once over the complete durable log. It travels with the Session summary, so the sidebar reads it without activating anything, and it survives paging, compaction, and reloads.
-- Sessions that existed before the plugin was installed have no cached value yet; hovering such a row performs one non-activating projection read, and the value is cached from then on. The first hover of a large old Session can therefore show this section a moment late.
-
-## Notes
-
-- Wall-clock means idle time counts too. If you need "time actually spent working", DSH's composer stats strip shows model plus tool wall time instead.
-- Nothing model-facing is added, nothing is sent anywhere, and the plugin keeps no state of its own besides the folded projection.
-- Uninstall or disable it in **Settings → Plugins**; the hover card returns to its default content.
+- The value is the actual elapsed time, including the periods when the session was idle. To see the time actually spent executing, the statistics bar below the composer shows the sum of model time and tool time.
+- The plugin does not inject content into the model and does not send data outside; apart from the computed start time it stores no state.
+- It can be disabled or removed in **Settings → Plugins**, and the hover card returns to its original content.
 
 ## Development
 
-The package is shipped as-is: plain ESM on the Host, one browser module registering into the `sidebar.session.row.hover` slot, no build step.
+The package is published as is, with no build step: the Host side is a plain ESM module, and the client side is a browser module registered into the `sidebar.session.row.hover` slot.
 
 ```sh
 # point a profile at this checkout
 dsh plugin --profile web add /absolute/path/to/this/directory
 ```
 
-MIT licensed.
+## License
+
+MIT

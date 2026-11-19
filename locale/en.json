@@ -1,6 +1,6 @@
 {
   "meta": {
     "title": "Session elapsed time",
-    "description": "Shows how long a conversation has been running since its first message in the sidebar Session hover card, together with that start time. The start is the first human or scheduled prompt of the Session log (a fork counts from its own creation); the figure is wall-clock time and keeps counting while the Session is idle. Cold rows are read once on first hover."
+    "description": "Shows the time elapsed since a session's first message, and that start time, in the sidebar Session hover card. The start time is the first message in the session log initiated by the user or by a scheduled task; a forked session uses its own creation time. The value is the actual elapsed time, including periods when the session was idle. Sessions that existed before installation are read once on first hover and cached afterwards."
   }
 }
