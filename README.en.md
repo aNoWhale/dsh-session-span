@@ -39,7 +39,7 @@ dsh plugin --profile web add dsh-session-span
 
 The Desktop profile is managed by the application, so install from the Plugins page there.
 
-Requirements: DSH `>=0.2.2-rc.3` and Node `>=22.6`. The package has no dependencies and no installation scripts.
+Requirements: verified on DSH `0.2.2-rc.3`. The package declares `engines.dsh` as `>=0.2.0-0`, so every stable or prerelease version from 0.2.0 onward can install it; the Node version is whatever DSH itself requires, since the package adds no restriction of its own. If a 0.2.0 or 0.2.1 installation misbehaves, upgrade to 0.2.2 or later.
 
 ## How the start time is determined
 

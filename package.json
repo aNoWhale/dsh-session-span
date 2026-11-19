@@ -28,8 +28,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=22.6",
-    "dsh": ">=0.2.2-rc.3"
+    "dsh": ">=0.2.0-0"
   },
   "exports": {
     ".": "./index.js",
