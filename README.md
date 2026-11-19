@@ -1,55 +1,57 @@
 # dsh-session-span
 
-A [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) plugin that shows **how long a conversation has been running since its first message**, right in the sidebar Session hover card.
+**简体中文** | [English](README.en.md)
+
+一个 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 插件：在侧边栏会话行的悬停卡片里显示**这个会话从第一条消息到现在已经过了多久**。
 
 ```
 会话标题
 C:\Users\Administrator
-3 分钟前                        ← DSH: last activity
-已持续 3 小时 12 分              ← this plugin: from the first message
-首条消息 2026年11月19日 10:57     ← and when that was
+3 分钟前                        ← DSH 原有：最后活动时间
+已持续 3 小时 12 分              ← 本插件：从第一条消息到现在
+首条消息 2026年11月19日 10:57     ← 以及起点时间
 ● 运行中
 ```
 
-## Install
+## 安装
 
-In the DeepSeek Harness app: **Settings → Plugins → Add plugin**, enter `dsh-session-span`, then enable the **Session elapsed time** bundle.
+应用内：**设置 → 插件 → 添加插件**，填 `dsh-session-span`，然后启用 **会话历时** 这个 bundle。
 
-For a `web` profile managed from a shell:
+命令行（面向 `web` 等由 shell 管理的 profile）：
 
 ```sh
 dsh plugin --profile web add dsh-session-span
 ```
 
-The Desktop profile is owned by the app, so install there through the Plugins page.
+Desktop 的 profile 由应用独占管理，请在应用内的插件页安装。
 
-Requires DSH `>=0.2.2-rc.3` and Node `>=22.6`. The package has no dependencies and no install scripts.
+要求 DSH `>=0.2.2-rc.3`、Node `>=22.6`。本包没有依赖，也没有安装脚本。
 
-## What it shows
+## 显示什么
 
-- `已持续` / `Elapsed` — wall-clock time from the conversation's first message to now. It keeps counting while the Session is idle and refreshes every 30 seconds while the card is open.
-- `首条消息` / `First message` — that start stamp in the device time zone, formatted through the app locale (English shows `2026-11-19 09:12`).
+- `已持续` / `Elapsed` — 从会话第一条消息到现在的**墙钟时间**，会话空闲时也继续累计；悬停卡片打开期间每 30 秒刷新一次。
+- `首条消息` / `First message` — 起点时间，按设备时区和应用语言格式化（英文界面显示 `2026-11-19 09:12`）。
 
-## How the start is decided
+## 起点怎么定
 
-- The start is the first `user/message` committed with a `user` or `schedule` source, so a Session created by a scheduled task also has a start.
-- A fork counts from its own creation instead of inheriting the parent's first prompt.
-- The value is a Host Session projection (`sessionSpan`) folded once over the complete durable log. It travels with the Session summary, so the sidebar reads it without activating anything, and it survives paging, compaction, and reloads.
-- Sessions that existed before the plugin was installed have no cached value yet; hovering such a row performs one non-activating projection read, and the value is cached from then on. The first hover of a large old Session can therefore show the section a moment late.
+- 起点取会话日志中第一条 `user/message`，来源为 `user` 或 `schedule`，所以**定时任务拉起的会话也有起点**。
+- Fork 会话不继承父会话的第一条消息，而从自己的创建时间算起。
+- 该值是 Host 侧的一个 Session 投影（`sessionSpan`），一次折叠完整持久日志后随会话摘要下发，侧边栏读取它不会激活会话，分页、压缩、重启都不会改变。
+- 插件装好之前就已存在的旧会话没有缓存值；首次悬停这类行时会做一次非激活的投影读取，之后该值就被缓存。因此大日志旧会话的第一次悬停，这一段可能稍晚出现。
 
-## Notes
+## 说明
 
-- Wall-clock means idle time counts too. If you need "time actually spent working", DSH's composer stats strip shows model plus tool wall time instead.
-- Nothing model-facing is added, nothing is sent anywhere, and the plugin keeps no state of its own besides the folded projection.
-- Uninstall or disable it in **Settings → Plugins**; the hover card returns to its default content.
+- 墙钟意味着空闲时间也计入。如果你要看"真正在跑的时间"，DSH 输入框下方的统计条显示的是模型用时加工具用时。
+- 不向模型注入任何内容，不向外发送任何数据；除折叠出的投影外不保存自己的状态。
+- 在 **设置 → 插件** 里停用或卸载即可，悬停卡片会恢复为默认内容。
 
-## Development
+## 开发
 
-The package is shipped as-is: plain ESM on the Host, one browser module registering into the `sidebar.session.row.hover` slot, no build step.
+本包按原样发布，没有构建步骤：Host 侧是普通 ESM，客户端是一个注册进 `sidebar.session.row.hover` 插槽的浏览器模块。
 
 ```sh
-# point a profile at this checkout
+# 让某个 profile 指向这份检出
 dsh plugin --profile web add /absolute/path/to/this/directory
 ```
 
-MIT licensed.
+MIT License。
