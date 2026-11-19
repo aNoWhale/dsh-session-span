@@ -1,7 +1,7 @@
 {
   "name": "dsh-session-span",
-  "version": "0.1.0",
-  "description": "Shows how long a Session has been running since its first message, in the sidebar Session hover card.",
+  "version": "1.0.1",
+  "description": "在侧边栏会话行的悬停卡片中显示会话的已用时长与起始时间 / Session elapsed time and start time in the sidebar hover card.",
   "type": "module",
   "license": "MIT",
   "author": "cks <940962289@qq.com>",
