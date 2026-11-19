@@ -1,0 +1,3 @@
+- insert:
+    - id: session-span
+      name: '@local/dsh-session-span'
