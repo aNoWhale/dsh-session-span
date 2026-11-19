@@ -19,8 +19,8 @@ window.__ModuleLoader__.load({
     const NS = 'sessionSpan';
 
     const zh = {
-      'span.label': '已持续 {duration}',
-      'span.since': '首条消息 {time}',
+      'span.label': '已用时 {duration}',
+      'span.since': '第一条消息 {time}',
       'span.date': '{y}年{m}月{d}日',
       'span.lessThanMinute': '不到 1 分钟',
       'span.minutes': '{minutes} 分钟',
