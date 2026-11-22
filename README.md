@@ -4,6 +4,7 @@
 
 [![npm version](https://img.shields.io/npm/v/dsh-session-span.svg)](https://www.npmjs.com/package/dsh-session-span)
 [![license](https://img.shields.io/npm/l/dsh-session-span.svg)](LICENSE)
+[![Listed on dsh-plugin.org](https://dsh-plugin.org/badges/listed.svg)](https://dsh-plugin.org/plugins/dshplugin/dsh-plugin-hub)
 
 ## 引言
 
